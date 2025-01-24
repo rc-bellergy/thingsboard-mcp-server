@@ -7,7 +7,7 @@ import sys
 
 load_dotenv()
 
-mcp = FastMCP("ThingsBoard", port=8001)
+mcp = FastMCP("ThingsBoard")
 
 # Environment variables
 THINGSBOARD_API_BASE = os.getenv("THINGSBOARD_API_BASE", None)
