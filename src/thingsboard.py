@@ -118,6 +118,20 @@ async def get_device_attributes(device_id: str) -> Any:
     endpoint = f"plugins/telemetry/DEVICE/{device_id}/values/attributes"
     return await make_thingsboard_request(endpoint)
 
+@mcp.tool()
+async def get_device_id_by_name(customer_id: str, device_name: str, page: int = 0, page_size: int = 10) -> Any:
+    """Get device id by device name and customer id.
+
+    Args:
+        device_name (str): The device name
+        customer_id (str): The ID of the customer
+
+    Returns:
+        Any: JSON response
+    """
+    endpoint = f"customer/{customer_id}/devices?pageSize={page_size}&page={page}&textSearch={device_name}"
+    return await make_thingsboard_request(endpoint)
+
 if __name__ == "__main__":
     if THINGSBOARD_API_BASE == None:
         print("Missing THINGSBOARD_API_BASE environment variable")

@@ -2,20 +2,6 @@
 
 ## Setup environment using uv
 
-### Windows
-```
-# Install uv
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-# Create virtual environment
-uv venv
-
-# Activate virtual environment
-.venv\Scripts\activate
-```
-
-### Linux
-
 ```
 # Install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
