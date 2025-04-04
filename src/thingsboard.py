@@ -74,6 +74,22 @@ async def get_tenant_devices(page: int = 0, page_size: int = 10) -> Any:
     return await make_thingsboard_request(endpoint, params)
 
 @mcp.tool()
+async def get_customer_devices(customer_id: str, page: int = 0, page_size: int = 1) -> Any:
+    """Get a paginated list of devices for the tenant.
+
+    Args:
+        customer_id (str): The ID of customer
+        page (int): The page number to retrieve. Defaults to 0.
+        page_size (int): The number of devices per page. Defaults to 10.
+
+    Returns:
+        Any: JSON response
+    """
+    endpoint = "tenant/devices"
+    endpoint = f"customer/{customer_id}/devices?pageSize={page_size}&page={page}"
+    return await make_thingsboard_request(endpoint)
+
+@mcp.tool()
 async def get_historic_device_telemetry(device_id: str, keys: str, startTs: str, endTs: str) -> Any:
     """Gets a range of time series values for specified device
 
