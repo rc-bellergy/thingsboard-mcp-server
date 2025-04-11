@@ -74,21 +74,21 @@ async def get_tenant_devices(page: int = 0, page_size: int = 10) -> Any:
     return await make_thingsboard_request(endpoint, params)
 
 @mcp.tool()
-async def get_customer_devices(customer_id: str, page: int = 0, page_size: int = 10, textSearch: str = "") -> Any:
+async def get_customer_devices(customer_id: str, page: int = 0, page_size: int = 10, device_name: str = "") -> Any:
     """Get a paginated list of devices for the customer.
 
     Args:
         customer_id (str): The ID of customer
         page (int): The page number to retrieve. Defaults to 0.
         page_size (int): The number of devices per page. Defaults to 10.
-
+        device_name (str): The text to search for in the device names. Defaults to "".
     Returns:
         Any: JSON response
     """
     endpoint = f"customer/{customer_id}/devices?pageSize={page_size}&page={page}"
     ## If textSearch is not empty, add it to the endpoint
-    if textSearch:
-        endpoint += f"&textSearch={textSearch}"
+    if device_name:
+        endpoint += f"&textSearch={device_name}"
     return await make_thingsboard_request(endpoint)
 
 @mcp.tool()
@@ -143,6 +143,8 @@ async def get_device_id_by_name(customer_id: str, device_name: str, page: int = 
     Args:
         device_name (str): The device name
         customer_id (str): The ID of the customer
+        page (int): The page number to retrieve. Defaults to 0.
+        page_size (int): The number of devices per page. Defaults to 10.
 
     Returns:
         Any: JSON response
